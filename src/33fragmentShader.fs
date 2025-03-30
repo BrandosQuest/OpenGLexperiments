@@ -23,10 +23,14 @@ void main()
     FragColor = vec4(greyValue, greyValue, greyValue , 1.0f);
     //FragColor = vec4(1.0f, 1.0f, 1.0f , 1.0f){;
     //float distanceFromCircleNormalized=abs(lenght(pos)-0.5)*(1/sqrt(2));
-    float distanceFromCircleNormalized=sin(lenght(pos)*8+timeFormInit)/8;
+    float acceleratedTime=timeFormInit*1;
+    //float acceleratedTime=10*sin(timeFormInit);
+    float numOfCircles=4;
+    float distanceFromCircleNormalized=sin(lenght(pos)*numOfCircles*2+acceleratedTime)/8;
     //distanceFromCircleNormalized= smoothstep(0.0, 0.1, distanceFromCircleNormalized);
     distanceFromCircleNormalized= abs(distanceFromCircleNormalized);
-    distanceFromCircleNormalized= 0.02/distanceFromCircleNormalized;
+    float glow=0.02;
+    distanceFromCircleNormalized= glow/distanceFromCircleNormalized;
     FragColor = vec4(distanceFromCircleNormalized, distanceFromCircleNormalized, distanceFromCircleNormalized , 1.0f);
 
 
