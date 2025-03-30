@@ -21,5 +21,27 @@ void main()
     //float greyValue= ((sin(timeFormInit)*l)+1)/2;
     float greyValue= (sin(timeFormInit)+1)/2;
     FragColor = vec4(greyValue, greyValue, greyValue , 1.0f);
-    //FragColor = vec4(1.0f, 1.0f, 1.0f , 1.0f);
+    //FragColor = vec4(1.0f, 1.0f, 1.0f , 1.0f){;
+    //float distanceFromCircleNormalized=abs(lenght(pos)-0.5)*(1/sqrt(2));
+    float distanceFromCircleNormalized=sin(lenght(pos)*8+timeFormInit)/8;
+    //distanceFromCircleNormalized= smoothstep(0.0, 0.1, distanceFromCircleNormalized);
+    distanceFromCircleNormalized= abs(distanceFromCircleNormalized);
+    distanceFromCircleNormalized= 0.02/distanceFromCircleNormalized;
+    FragColor = vec4(distanceFromCircleNormalized, distanceFromCircleNormalized, distanceFromCircleNormalized , 1.0f);
+
+
 }
+/*
+x^2 + y^2 = r^2
+
+y=sqrt(x^2-r^2);
+
+
+if(pos.y==sqrt((pos.x*pos.x)-(0.5*0.5))){
+        FragColor = vec4(1.0, 1.0, 1.0 , 1.0f);
+    }
+    
+    if((0.5-lenght(pos))<0.1 && (0.5-lenght(pos))>0.0){
+        FragColor = vec4(1.0, 1.0, 1.0 , 1.0f);
+    }
+*/
