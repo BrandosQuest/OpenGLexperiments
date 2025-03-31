@@ -47,7 +47,7 @@ int main()
 
     // build and compile our shader program
     // ------------------------------------
-    Shader ourShader("C:/BrandoOnPC/programmazione/OpenGL/GLFWCMakeSetup/src/33vertexShader.vs", "C:/BrandoOnPC/programmazione/OpenGL/GLFWCMakeSetup/src/33fragmentShader.fs"); // you can name your shader files however you like
+    Shader ourShader("C:/BrandoOnPC/programmazione/OpenGL/GLFWCMakeSetup/src/newVertShader.vert", "C:/BrandoOnPC/programmazione/OpenGL/GLFWCMakeSetup/src/newFragShader.frag"); // you can name your shader files however you like
 
     //This will synchronize your frame rate with your monitor's refresh rate (typically 60Hz), 
     // preventing unnecessary rendering.

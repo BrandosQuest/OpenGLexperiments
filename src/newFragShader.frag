@@ -8,6 +8,54 @@ uniform float timeFormInit;
 uniform float width;
 uniform float hight;
 
+float noiseBrando(){
+    int time=int (timeFormInit*1000);
+    return float((time%200))/200.0;
+}
+float sdSegment( in vec2 p, in vec2 a, in vec2 b )
+{
+    vec2 pa = p-a, ba = b-a;
+    float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+    return length( pa - ba*h );
+}
+
+void main()
+{
+    vec2 pos= vec2(ourCoords.x, ourCoords.y);//coord system with 2 axis 
+    pos.x = pos.x * width/hight;// normalising x coord indiendently of the screen ratio
+    float time=timeFormInit*10;
+    
+    FragColor= vec4(0,0,0,1);
+    if(sdSegment(pos, vec2(-0.5, sin(time)),vec2(+0.5, sin(time)))<0.1){
+        FragColor= vec4(1,0,0,1);
+    }
+}
+
+/*
+x^2 + y^2 = r^2
+
+y=sqrt(x^2-r^2);
+
+
+if(pos.y==sqrt((pos.x*pos.x)-(0.5*0.5))){
+        FragColor = vec4(1.0, 1.0, 1.0 , 1.0f);
+    }
+    
+    if((0.5-lenght(pos))<0.1 && (0.5-lenght(pos))>0.0){
+        FragColor = vec4(1.0, 1.0, 1.0 , 1.0f);
+    }
+*/
+/*
+#version 330 core
+out vec4 FragColor;
+
+in vec3 ourColor;
+in vec3 ourCoords;
+
+uniform float timeFormInit;
+uniform float width;
+uniform float hight;
+
 float lenght(vec2 pos){
     return sqrt((pos.x*pos.x)+(pos.y*pos.y));
 }
@@ -32,19 +80,8 @@ void main()
     float glow=0.02;
     distanceFromCircleNormalized= glow/distanceFromCircleNormalized;
     FragColor = vec4(distanceFromCircleNormalized, distanceFromCircleNormalized, distanceFromCircleNormalized , 1.0f);
+    
+
 
 }
-/*
-x^2 + y^2 = r^2
-
-y=sqrt(x^2-r^2);
-
-
-if(pos.y==sqrt((pos.x*pos.x)-(0.5*0.5))){
-        FragColor = vec4(1.0, 1.0, 1.0 , 1.0f);
-    }
-    
-    if((0.5-lenght(pos))<0.1 && (0.5-lenght(pos))>0.0){
-        FragColor = vec4(1.0, 1.0, 1.0 , 1.0f);
-    }
 */
