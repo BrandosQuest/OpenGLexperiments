@@ -23,15 +23,35 @@ void main()
 {
     vec2 pos= vec2(ourCoords.x, ourCoords.y);//coord system with 2 axis 
     pos.x = pos.x * width/hight;// normalising x coord indiendently of the screen ratio
-    float time=timeFormInit*10;
+    float time=timeFormInit*1;
+
+    //float posY=sin(time);
+    float posY=0;
+
+    float glow=10;
     
     FragColor= vec4(0,0,0,1);
-    if(sdSegment(pos, vec2(-0.5, sin(time)),vec2(+0.5, sin(time)))<0.1){
-        FragColor= vec4(1,0,0,1);
+
+    float sdf=sdSegment(pos, vec2(-0.5, posY),vec2(+0.5, posY));
+    if(sdf<0.1){
+        FragColor= vec4(1*glow*sdf,0,0,1);
+    }else if(sdf<0.2){
+        FragColor= vec4(0,-(1*glow*sdf)+2,0,1);
+    }else if(sdf<0.3){
+        FragColor= vec4(0,0,(1*glow*sdf)-2,1);
+    }else if(sdf<0.4){
+        FragColor= vec4(0,(1*glow*sdf)+4,0,1);
     }
+    
 }
 
 /*
+FragColor= vec4(0,0,0,1);
+    if(sdSegment(pos, vec2(-0.5, sin(time)),vec2(+0.5, sin(time)))<0.1){
+        FragColor= vec4(1,0,0,1);
+    }
+
+
 x^2 + y^2 = r^2
 
 y=sqrt(x^2-r^2);
